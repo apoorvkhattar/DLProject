@@ -21,6 +21,7 @@ Given an image and a question, we use two models to extract the image and questi
 
 ## Results
 1. The following table summarizes the accuracy of the baselines on the training and validation sets:
+
 | Model  | Train Accuracy | Test Accuracy |
 | ------------- | ------------- | ------------- |
 | MLB  | 83.65  | 63.4  |
@@ -28,6 +29,7 @@ Given an image and a question, we use two models to extract the image and questi
 | BLOCK  | 91.22  | 68.73  |
 
 2. The following table summarizes the accuracy of the VQA model with attention on the training and validation sets:
+
 | Model  | Train Accuracy | Test Accuracy |
 | ------------- | ------------- | ------------- |
 | MLB  | 83.78  | 62.74  |
