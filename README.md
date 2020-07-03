@@ -13,11 +13,26 @@ During the training phase, each image is resized to (256,256) and a random patch
 ## About the project
 Given an image and a question, we use two models to extract the image and question feature vector, **v** and **q** respectively. Now we need to fuse **q** and **v** to predict the final answer. In our project we focus on the following fusion techniques:
 
-1. MLB: Kim et al. \cite{kim2016hadamard} explore simple techniques for fusion such as element-wise sum, concatenation, hadamard product etc. They show empirically that hadamard product between **q** and **v** produces the best results. For the image vector **v** and question vector **q**, the fused feature vector, **f** is given by:
+1. MLB: Kim et al. [1] explore simple techniques for fusion such as element-wise sum, concatenation, hadamard product etc. They show empirically that hadamard product between **q** and **v** produces the best results. For the image vector **v** and question vector **q**, the fused feature vector, **f** is given by: ![eq](https://latex.codecogs.com/svg.latex?y_i%20=%20(q^T%20W_q)_i%20*%20(v^T%20W_v)_i,) where ![eq](https://latex.codecogs.com/svg.latex?W_q) and ![eq](https://latex.codecogs.com/svg.latex?W_q) are weight matrices that transform **q** and **v** to have the same dimensions.
 
-  ![eq](https://latex.codecogs.com/svg.latex?y_i%20=%20(q^T%20W_q)_i%20*%20(v^T%20W_v)_i,)
-  
-where ![eq](https://latex.codecogs.com/svg.latex?W_q) and ![eq](https://latex.codecogs.com/svg.latex?W_q) are weight matrices that transform **q** and **v** to have the same dimensions.
+2. MUTAN: The fused feature vector in MLB captures the relation between the neurons at the same index for the two feature vectors. However, the fused vector must capture relation between every pair of neurons. This fused feature vector is given by, ![eq](https://latex.codecogs.com/svg.latex?y_k%20=%20\sum_{i=1}^{d_q}%20\sum_{j=1}^{d_v}%20T_{ijk}%20q_i%20v_j,) where **T** is a learnable 3D weight matrix. Since the dimensions of feature vectors are large, thus there are a lot of parameters in **T**. Younes et al. 2017 [2] use tucker decomposition to reduce the number of parameters in **T**.
+
+3. BLOCK: In MUTAN, we compress the feature vector **q** and **v** to reduce the number of parameters in **T** but this can lead to loss of information if the reduced sized feature vectors do not efficiently capture all the information in **q** and **v**. Younes et al. 2019 [3] propose to determine the fused vector **y** in chunks i.e. the feature vector **q** and **v** are divided into blocks and Tucker decomposition is done on each block. Finally all these blocks are concatenated to obtain the fused feature vector **y**.
+
+## Results
+1. The following table summarizes the accuracy of the baselines on the training and validation sets:
+| Model  | Train Accuracy | Test Accuracy |
+| ------------- | ------------- | ------------- |
+| MLB  | 83.65  | 63.4  |
+| MUTAN  | 89.96  | 67.37  |
+| BLOCK  | 91.22  | 68.73  |
+
+2. The following table summarizes the accuracy of the VQA model with attention on the training and validation sets:
+| Model  | Train Accuracy | Test Accuracy |
+| ------------- | ------------- | ------------- |
+| MLB  | 83.78  | 62.74  |
+| MUTAN  | 85.93  | 68.32  |
+| BLOCK  | 86.14  | 70.1  |
 
 
 ###### This work was done as part of our project for CSE641: Deep Learning course at IIIT Delhi.
