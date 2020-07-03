@@ -36,5 +36,10 @@ Given an image and a question, we use two models to extract the image and questi
 | MUTAN  | 85.93  | 68.32  |
 | BLOCK  | 86.14  | 70.1  |
 
+## References
+1. Kim, Jin-Hwa, et al. "Hadamard product for low-rank bilinear pooling." arXiv preprint arXiv:1610.04325 (2016).
+2. Ben-Younes, Hedi, et al. "Mutan: Multimodal tucker fusion for visual question answering." Proceedings of the IEEE international conference on computer vision. 2017.
+3. Ben-Younes, Hedi, et al. "Block: Bilinear superdiagonal fusion for visual question answering and visual relationship detection." Proceedings of the AAAI Conference on Artificial Intelligence. Vol. 33. 2019.
 
+###### Refer to the attached report for plots, link to weights and inferences.
 ###### This work was done as part of our project for CSE641: Deep Learning course at IIIT Delhi.
